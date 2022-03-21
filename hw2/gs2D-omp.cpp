@@ -51,7 +51,7 @@ void gauss_seidel_2D(int N) {
     Timer t;
     t.tic();
     
-    // run jacobi loop while iterations < MAX and residual is large
+    // run gauss-siedel loop while iterations < MAX and residual is large
     while (it < MAX_ITERATIONS && (res_init / res_curr) < tol) {
         // perform gauss-siedel iteration for red points
         #pragma omp parallel for collapse(2) private(i,j)
@@ -81,7 +81,7 @@ void gauss_seidel_2D(int N) {
         it++; 
     }
     
-    // print time taken to compete jacobi method
+    // print time taken to compete gauss-siedel method
     double time = t.toc();
     res_curr = get_residual_norm(N, u, f);
     printf("Final Residual Norm = %f\n", res_curr);
