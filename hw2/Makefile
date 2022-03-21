@@ -26,10 +26,10 @@ omp_solved_6: omp_solved6.c
 	gcc -fopenmp -o omp_solved6 omp_solved6.c
 
 jacobi2D-omp: jacobi2D-omp.cpp
-	g++ -fopenmp -O3 -march=native -o jacobi2D-omp jacobi2D-omp.cpp
+	g++ -fopenmp -march=native -o jacobi2D-omp jacobi2D-omp.cpp
 
 gs2D-omp: gs2D-omp.cpp
-	g++ -fopenmp -O3 -march=native -o gs2D-omp gs2D-omp.cpp
+	g++ -fopenmp -march=native -o gs2D-omp gs2D-omp.cpp
 
 clean: 
 	rm -f *.o

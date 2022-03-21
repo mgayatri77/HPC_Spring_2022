@@ -116,10 +116,8 @@ Comments included in code
 
 4. OpenMP version of 2D Jacobi/Gauss-Seidel smoothing
 OpenMP implementations of the Jacobi and the Gauss-Seidel method with
-red-black coloring included. 
-
-Choosing the right hand side f(x, y) = 1, timings for different values of N
-and different numbers of threads shown below.
+red-black coloring included. Choosing the right hand side f(x, y) = 1, 
+timings for different values of N and different numbers of threads shown below.
 
 Processor used: Intel Core i5-1035G4 CPU (x64-based processor)
 Processor speed: 1.50 GHz
@@ -127,38 +125,38 @@ Number of cores: 4
 
 Jacobi Method
 N=100, Num_iterations=10000
-Threads=1, runtime = 0.160 seconds
-Threads=2, runtime = 0.093 seconds
-Threads=4, runtime = 0.089 seconds
-Threads=8, runtime = 0.161 seconds
+Threads=1, runtime = 2.574 seconds
+Threads=2, runtime = 1.378 seconds
+Threads=4, runtime = 1.079 seconds
+Threads=8, runtime = 0.757 seconds
 
 N=1000, Num_iterations=5000
-Threads=1, runtime = 27.67 seconds
-Threads=2, runtime = 23.95 seconds
-Threads=4, runtime = 20.08 seconds
-Threads=8, runtime = 19.46 seconds
+Threads=1, runtime = 137.20 seconds
+Threads=2, runtime = 82.57 seconds
+Threads=4, runtime = 68.84 seconds
+Threads=8, runtime = 50.94 seconds
 
-N=10000, Num_iterations=50
-Threads=1, runtime = 27.03 seconds
-Threads=2, runtime = 19.23 seconds
-Threads=4, runtime = 16.19 seconds
-Threads=8, runtime = 16.32 seconds
+N=10000, Num_iterations=20
+Threads=1, runtime = 53.32 seconds
+Threads=2, runtime = 33.70 seconds
+Threads=4, runtime = 23.32 seconds
+Threads=8, runtime = 18.38 seconds
 
 Gauss-Siedel Method
 N=100, Num_iterations=10000
-Threads=1, runtime = 0.33 seconds
-Threads=2, runtime = 0.20 seconds
-Threads=4, runtime = 0.14 seconds
-Threads=8, runtime = 0.12 seconds
+Threads=1, runtime = 2.72 seconds
+Threads=2, runtime = 1.55 seconds
+Threads=4, runtime = 1.17 seconds
+Threads=8, runtime = 0.85 seconds
 
 N=1000, Num_iterations=5000
-Threads=1, runtime = 24.78 seconds
-Threads=2, runtime = 18.71 seconds
-Threads=4, runtime = 16.81 seconds
-Threads=8, runtime = 16.21 seconds
+Threads=1, runtime = 151.23 seconds
+Threads=2, runtime = 82.27 seconds
+Threads=4, runtime = 67.68 seconds
+Threads=8, runtime = 50.75 seconds
 
-N=10000, Num_iterations=50
-Threads=1, runtime = 26.89 seconds
-Threads=2, runtime = 21.96 seconds
-Threads=4, runtime = 19.52 seconds
-Threads=8, runtime = 18.21 seconds
+N=10000, Num_iterations=20
+Threads=1, runtime = 55.61 seconds
+Threads=2, runtime = 33.14 seconds
+Threads=4, runtime = 23.09 seconds
+Threads=8, runtime = 18.39 seconds

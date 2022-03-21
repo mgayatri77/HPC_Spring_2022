@@ -134,9 +134,9 @@ int main(int argc, char** argv) {
 //  Answer: implemented
 //
 // * What percentage of the peak FLOP-rate do you achieve with your code?
-//  Answer: Max flop-rate is 38.01 GFlop/s
+//  Answer: Max flop-rate is 34.44 GFlop/s
 //          Peak flop-rate is 48.00 GFlop/s
-//          Percentage of peak = 79.19 %
+//          Percentage of peak = 71.75 %
 //
 // NOTE: Compile your code using the flag -march=native. This tells the compiler
 // to generate the best output using the instruction set supported by your CPU
