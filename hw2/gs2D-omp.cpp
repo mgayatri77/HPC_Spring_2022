@@ -1,3 +1,5 @@
+#if defined(_OPENMP)
+
 #include <stdio.h>
 #include "utils.h"
 #include "math.h"
@@ -105,3 +107,4 @@ int main(int argc, char** argv) {
     // call gauss-siedel method with specified N 
     gauss_seidel_2D(1000); 
 }
+#endif

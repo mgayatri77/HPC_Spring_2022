@@ -1,3 +1,5 @@
+#if defined(_OPENMP)
+
 #include <omp.h>
 #include <stdio.h>
 #include "utils.h"
@@ -104,3 +106,5 @@ int main(int argc, char** argv) {
     // call jacobi method with specified N 
     jacobi_2D(1000); 
 }
+
+#endif

@@ -1,0 +1,164 @@
+1: Finding Memory Bugs
+Comments included in code
+
+2: Matrix-Matrix Multiplication
+Q1. Using MMult0 as a reference, implement MMult1 and try to rearrange loops to
+maximize performance. Measure performance for different loop arrangements and
+try to reason why you get the best performance for a particular order?
+Answer: Performance with the loop ordering "jpi" is quickest and "pij" is the slowest. 
+This is because of temporal locality. The variables i and p are always incremented by 1, 
+while j is incremented by "k" or "m". Thus putting j on the outermost loop results in the
+best performance. 
+
+Processor used: Intel Core i5-1035G4 CPU (x64-based processor)
+Processor speed: 1.50 GHz
+Number of cores: 4
+
+Performance with blocked version (BLOCK_SIZE=64) of code for different matrix sizes shown below: 
+Dimension Time      Gflop/s       GB/s        Error
+    128   0.173867  11.506947 184.111157 0.000000e+00
+    256   0.186220  10.811200 172.979194 0.000000e+00
+    384   0.198699  10.258882 164.142120 0.000000e+00
+    512   0.212194  10.120369 161.925907 0.000000e+00
+    640   0.202697  10.346236 165.539773 0.000000e+00
+    768   0.270158  10.060454 160.967257 0.000000e+00
+    896   0.271098  10.613493 169.815892 0.000000e+00
+    1024   0.221761   9.683771 154.940332 0.000000e+00
+    1152   0.325719   9.387393 150.198290 0.000000e+00
+    1280   0.431573   9.718652 155.498435 0.000000e+00
+    1408   0.549626  10.157128 162.514049 0.000000e+00
+    1536   0.712445  10.173072 162.769152 0.000000e+00
+    1664   0.910189  10.124148 161.986364 0.000000e+00
+    1792   1.169476   9.841309 157.460950 0.000000e+00
+    1920   1.420188   9.967537 159.480587 0.000000e+00  
+  
+Question: Experiment with different values for BLOCK_SIZE (use multiples of 4) and
+measure performance.  What is the optimal value for BLOCK_SIZE?
+
+Optimal value is 64 as shown by the runtimes below with BLOCK_SIZE=32 and BLOCK_SIZE=128.
+BLOCK_SIZE = 32
+Dimension  Time       Gflop/s     GB/s        Error
+    128   0.181692  11.011417 176.182666 0.000000e+00
+    256   0.233210   8.632857 138.125707 0.000000e+00
+    384   0.254377   8.013434 128.214947 0.000000e+00
+    512   0.304427   7.054183 112.866922 0.000000e+00
+    640   0.236631   8.862552 141.800840 0.000000e+00
+    768   0.360023   7.549273 120.788372 0.000000e+00
+    896   0.278857  10.318176 165.090818 0.000000e+00
+    1024   0.288405   7.446082 119.137317 0.000000e+00
+    1152   0.314823   9.712288 155.396601 0.000000e+00
+    1280   0.504130   8.319894 133.118304 0.000000e+00
+    1408   0.543692  10.267982 164.287711 0.000000e+00
+    1536   1.019743   7.107435 113.718952 0.000000e+00
+    1664   0.932392   9.883056 158.128889 0.000000e+00
+    1792   1.421302   8.097626 129.562022 0.000000e+00
+    1920   1.440088   9.829799 157.276789 0.000000e+00 
+
+BLOCK_SIZE = 128
+Dimension Time      Gflop/s       GB/s        Error
+    128   0.164200  12.184457 194.951316 0.000000e+00
+    256   0.170213  11.827942 189.247070 0.000000e+00
+    384   0.177740  11.468641 183.498263 0.000000e+00
+    512   0.216126   9.936258 158.980124 0.000000e+00
+    640   0.201625  10.401250 166.419998 0.000000e+00
+    768   0.251602  10.802423 172.838763 0.000000e+00
+    896   0.303888   9.468257 151.492113 0.000000e+00
+    1024   0.333460   6.439998 103.039967 0.000000e+00
+    1152   0.351826   8.690800 139.052798 0.000000e+00
+    1280   0.456374   9.190501 147.048021 0.000000e+00
+    1408   0.628084   8.888338 142.213413 0.000000e+00
+    1536   0.823285   8.803461 140.855374 0.000000e+00
+    1664   0.935547   9.849728 157.595655 0.000000e+00
+    1792   1.158332   9.935984 158.975744 0.000000e+00
+    1920   1.449046   9.769030 156.304482 0.000000e+00
+
+Performance with blocked version of code with OpemMP for different matrix sizes shown below: 
+ Dimension       Time    Gflop/s       GB/s        Error
+        64   0.322774   6.196782  99.148504 0.000000e+00
+       128   0.293820   6.809225 108.947596 0.000000e+00
+       192   0.103174  19.482874 311.725983 0.000000e+00
+       256   0.093457  21.542140 344.674238 0.000000e+00
+       320   0.086880  23.384027 374.144440 0.000000e+00
+       384   0.077298  26.371046 421.936735 0.000000e+00
+       448   0.073141  29.504197 472.067149 0.000000e+00
+       512   0.062353  34.440522 551.048353 0.000000e+00
+       576   0.090009  25.477764 407.644226 0.000000e+00
+       640   0.075021  27.954162 447.266596 0.000000e+00
+       704   0.093642  22.356300 357.700808 0.000000e+00
+       768   0.104896  25.910561 414.568971 0.000000e+00
+       832   0.075561  30.488436 487.814977 0.000000e+00
+       896   0.093308  30.836570 493.385126 0.000000e+00
+       960   0.108720  32.551143 520.818289 0.000000e+00
+      1024   0.073981  29.027424 464.438781 0.000000e+00
+      1088   0.096798  26.610442 425.767076 0.000000e+00
+      1152   0.106010  28.843147 461.490356 0.000000e+00
+      1216   0.115577  31.114382 497.830115 0.000000e+00
+      1280   0.154659  27.119637 433.914184 0.000000e+00
+      1344   0.204675  23.722674 379.562783 0.000000e+00
+      1408   0.190983  29.230910 467.694564 0.000000e+00
+      1472   0.258072  24.717917 395.486668 0.000000e+00
+      1536   0.254470  28.481764 455.708223 0.000000e+00
+      1600   0.313908  26.096810 417.548958 0.000000e+00
+      1664   0.341074  27.017279 432.276458 0.000000e+00
+      1728   0.482251  21.398738 342.379809 0.000000e+00
+      1792   0.487990  23.584839 377.357420 0.000000e+00
+      1856   0.586250  21.811290 348.980640 0.000000e+00
+      1920   0.540539  26.188270 419.012319 0.000000e+00
+      1984   0.593471  26.318176 421.090819 0.000000e+00
+
+Question: What percentage of the peak FLOP-rate do you achieve with your code?
+Answer: Max flop-rate is 34.44 GFlop/s
+        Peak flop-rate is 48.00 GFlop/s
+        Percentage of peak = 71.75 %
+
+3. Finding OpenMP bugs
+Comments included in code
+
+4. OpenMP version of 2D Jacobi/Gauss-Seidel smoothing
+OpenMP implementations of the Jacobi and the Gauss-Seidel method with
+red-black coloring included. 
+
+Choosing the right hand side f(x, y) = 1, timings for different values of N
+and different numbers of threads shown below.
+
+Processor used: Intel Core i5-1035G4 CPU (x64-based processor)
+Processor speed: 1.50 GHz
+Number of cores: 4
+
+Jacobi Method
+N=100, Num_iterations=10000
+Threads=1, runtime = 0.160 seconds
+Threads=2, runtime = 0.093 seconds
+Threads=4, runtime = 0.089 seconds
+Threads=8, runtime = 0.161 seconds
+
+N=1000, Num_iterations=5000
+Threads=1, runtime = 27.67 seconds
+Threads=2, runtime = 23.95 seconds
+Threads=4, runtime = 20.08 seconds
+Threads=8, runtime = 19.46 seconds
+
+N=10000, Num_iterations=50
+Threads=1, runtime = 27.03 seconds
+Threads=2, runtime = 19.23 seconds
+Threads=4, runtime = 16.19 seconds
+Threads=8, runtime = 16.32 seconds
+
+Gauss-Siedel Method
+N=100, Num_iterations=10000
+Threads=1, runtime = 0.33 seconds
+Threads=2, runtime = 0.20 seconds
+Threads=4, runtime = 0.14 seconds
+Threads=8, runtime = 0.12 seconds
+
+N=1000, Num_iterations=5000
+Threads=1, runtime = 24.78 seconds
+Threads=2, runtime = 18.71 seconds
+Threads=4, runtime = 16.81 seconds
+Threads=8, runtime = 16.21 seconds
+
+N=10000, Num_iterations=50
+Threads=1, runtime = 26.89 seconds
+Threads=2, runtime = 21.96 seconds
+Threads=4, runtime = 19.52 seconds
+Threads=8, runtime = 18.21 seconds

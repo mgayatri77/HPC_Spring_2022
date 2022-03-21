@@ -1,4 +1,5 @@
 // g++ -fopenmp -O3 -march=native MMult1.cpp && ./a.out
+#if defined(_OPENMP)
 
 #include <stdio.h>
 #include <math.h>
@@ -64,7 +65,7 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
 int main(int argc, char** argv) {
   const long PFIRST = BLOCK_SIZE;
   const long PLAST = 2000;
-  const long PINC = std::max(50/BLOCK_SIZE,1) * BLOCK_SIZE; // multiple of BLOCK_SIZE
+  const long PINC = std::max(50/(BLOCK_SIZE),1) * BLOCK_SIZE; // multiple of BLOCK_SIZE
 
   printf(" Dimension       Time    Gflop/s       GB/s        Error\n");
   for (long p = PFIRST; p < PLAST; p += PINC) {
@@ -142,3 +143,5 @@ int main(int argc, char** argv) {
 // architecture. Also, try using either of -O2 or -O3 optimization level flags.
 // Be aware that -O2 can sometimes generate better output than using -O3 for
 // programmer optimized code.
+
+#endif
