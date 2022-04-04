@@ -19,9 +19,9 @@ The scan was parallelized by modifying the provided "scan_omp" function.
 Runtimes with different thread numbers are shown below. Note, runtimes were
 averaged over 10 repeats.  
 
-0 threads  : 0.676 s
-2 threads  : 0.441 s
-4 threads  : 0.405 s
-8 threads  : 0.388 s
-16 threads : 0.404 s
-32 threads : 0.443 s
+0 threads  : 0.617 s
+2 threads  : 0.487 s
+4 threads  : 0.398 s
+8 threads  : 0.381 s
+16 threads : 0.388 s
+32 threads : 0.394 s
