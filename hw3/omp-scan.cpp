@@ -22,28 +22,49 @@ void scan_seq(long* prefix_sum, const long* A, long n) {
   }
 }
 
-// Parallelized version of scan using OpenMP
 void scan_omp(long* prefix_sum, const long* A, long n) {
   if (n == 0) return;
+
+  // compute size each thread will operate on
+  long chunk_size = (n/NUM_THREADS); 
   
-  long chunk_size = n/NUM_THREADS;
   #pragma omp parallel num_threads(NUM_THREADS)
-  { 
-    long my_start = 1 + (omp_get_thread_num()*chunk_size);
-    long my_end = (omp_get_thread_num() == NUM_THREADS-1) ? n : my_start + chunk_size;  
-    prefix_sum[my_start] = A[my_start-1];
-    // fprintf(stderr, "Start: %li, End: %li\n", my_start, my_start+chunk_size); 
-    for (long i = my_start+1; i < my_end; i++) {
+  {  
+    // get thread number and start and end indices for current thread
+    long t_num = omp_get_thread_num();
+    long start = (t_num * chunk_size); 
+    long end = (t_num + 1) * chunk_size; 
+    
+    // make last thread run to end of array
+    if (t_num == (NUM_THREADS-1))
+      end = n; 
+    
+    // set prefix sum at start
+    if (start > 0) 
+      prefix_sum[start] = A[start-1];
+    else 
+      prefix_sum[start] = 0.; 
+    
+    // compute prefix sums
+    for (long i = start+1; i < end; i++) {
         prefix_sum[i] = prefix_sum[i-1] + A[i-1];
     }
   }
 
-  long partial_sum = 0; 
+  // loop over threads
   for (int i = 1; i < NUM_THREADS; i++) {
-      partial_sum = prefix_sum[i*chunk_size];
-      for (int j = i*chunk_size + 1; j <= (i+1)*chunk_size; j++)
-        prefix_sum[j] += partial_sum; 
-  }   
+      // set start and end indices for chunks
+      long start = i*chunk_size;
+      long end = (i+1)*chunk_size;
+      if (i == NUM_THREADS-1)
+        end = n; 
+      
+      // add partial sum to section of thread i in parallel
+      # pragma omp parallel for num_threads(NUM_THREADS)
+      for (long j = start; j < end; j++) {
+        prefix_sum[j] += prefix_sum[start-1];
+      }
+  }
 }
 
 int main() {

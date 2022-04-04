@@ -1,6 +1,6 @@
 1. Proposal was already submitted last week. 
 
-2. I modified the AVX portion of "sin4_intrin()" to improve it's accuracy 
+2. The AVX portion of "sin4_intrin()" was modified to improve it's accuracy 
 to 12-digits. Output from the program after modification was as follows: 
 
 Reference time: 1.6549
@@ -8,18 +8,20 @@ Taylor time:    19.5345     Error: 6.928236e-12
 Intrin time:    0.0312      Error: 6.928236e-12
 Vector time:    0.0327      Error: 2.454130e-03
 
-Extra Credit: 
+Extra Credit: Did not attempt
 
-3. I parallelized the scan by modifying the provided "scan_omp" function. 
-Runtimes with different thread numbers are shown below. 
+3. Processor/Architecture specifications shown below:  
+Processor used: Intel Core i5-1035G4 CPU (x64-based processor)
+Processor speed: 1.50 GHz
+Number of cores: 4
 
-Serial 
-2 threads
-4 threads
-8 threads 
-16 threads
-32 threads
+The scan was parallelized by modifying the provided "scan_omp" function. 
+Runtimes with different thread numbers are shown below. Note, runtimes were
+averaged over 10 repeats.  
 
-Architecture: 
-Processor Speed: 
-Number of Cores: 
+0 threads  : 0.676 s
+2 threads  : 0.441 s
+4 threads  : 0.405 s
+8 threads  : 0.388 s
+16 threads : 0.404 s
+32 threads : 0.443 s
