@@ -8,7 +8,29 @@ Taylor time:    19.5345     Error: 6.928236e-12
 Intrin time:    0.0312      Error: 6.928236e-12
 Vector time:    0.0327      Error: 2.454130e-03
 
-Extra Credit: Did not attempt
+Extra Credit: Extended the range of x from [-PI/4, PI/4] to [-infinity,infinity], 
+using the following transformations
+1. Bring x from [-infinity,infinity] to [-PI, PI] by subtracting 
+(2*PI)*round(x/2*PI) and using the following identities: 
+    sin(x + 2*PI) = sin(x)
+    sin(x  - 2*PI) = sin(x)
+2. Bring x from [-PI, PI] to [-PI/2, PI/2] by substracting/adding PI, using 
+the following identities: 
+    sin(x + PI) = -sin(x)
+    sin(x - PI) = -sin(x)
+3. Bring x from [-PI/2, PI/2] to [-PI/4, PI/4] by substracting PI/2, using the 
+following identities: 
+    sin(x + PI/2) = cos(x) = sqrt(1 - sin^2(x))
+    sin(x - PI/2) = -cos(x) = -sqrt(1 - sin^2(x))
+Combined all the transformations into the final returned sin(x) value.
+
+This method was implemented in the sinx_taylor() function. Output from the program after 
+this modification was as follows:
+
+Reference time: 1.5032
+Taylor time:    56.2607      Error: 6.928236e-12
+Intrin time:    0.0316      Error: 6.928236e-12
+Vector time:    0.0309      Error: 2.454130e-03
 
 3. Processor/Architecture specifications shown below:  
 Processor: AMD Opteron(TM) Processor 6272 (Linserv1 machine)

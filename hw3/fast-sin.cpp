@@ -26,9 +26,34 @@ void sin4_reference(double* sinx, const double* x) {
   for (long i = 0; i < 4; i++) sinx[i] = sin(x[i]);
 }
 
+// Extended range of this function to all real numbers
 void sin4_taylor(double* sinx, const double* x) {
   for (int i = 0; i < 4; i++) {
-    double x1  = x[i];
+    // subtract 2*PI from x[i] until x is in [-PI, PI]
+    double x1 = x[i] - 2*M_PI*round(x[i]/(2*M_PI)); 
+    int shift_by_pi = 1; 
+    int pi_by_2_flag = 0;  
+    
+    // shift by PI if needed, set flag
+    if (x1 > M_PI/2) {
+      shift_by_pi = -1; 
+      x1 -= M_PI;
+    } else if (x1 < -M_PI/2) {
+      shift_by_pi = -1;
+      x1 += M_PI;
+    }
+
+    // shift by PI/2 if needed, set flag
+    if (x1 > M_PI/4) {
+      pi_by_2_flag = 1; 
+      x1 -= M_PI/2;
+    }
+    else if(x1 < -M_PI/4) {
+      pi_by_2_flag = -1; 
+      x1 += M_PI/2;
+    }
+
+    // compute sin(x) using Taylor series approximation
     double x2  = x1 * x1;
     double x3  = x1 * x2;
     double x5  = x3 * x2;
@@ -42,11 +67,18 @@ void sin4_taylor(double* sinx, const double* x) {
     s += x7  * c7;
     s += x9  * c9;
     s += x11 * c11;
-    sinx[i] = s;
+
+    // compute result based on pi_by_2 and shift_by_pi flags
+    if (pi_by_2_flag == 1)
+      sinx[i] = shift_by_pi*sqrt(1 - s*s);
+    else if (pi_by_2_flag == -1)
+      sinx[i] = shift_by_pi*(-(sqrt(1 - s*s))); 
+    else 
+      sinx[i] = shift_by_pi*s; 
   }
 }
 
-// Modified this function to improve accuracy to 12 digits
+// Modified AVX portion of this function to improve accuracy to 12 digits
 void sin4_intrin(double* sinx, const double* x) {
   // The definition of intrinsic functions can be found at:
   // https://software.intel.com/sites/landingpage/IntrinsicsGuide/#
