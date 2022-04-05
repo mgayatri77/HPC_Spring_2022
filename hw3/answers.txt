@@ -11,9 +11,9 @@ Vector time:    0.0327      Error: 2.454130e-03
 Extra Credit: Did not attempt
 
 3. Processor/Architecture specifications shown below:  
-Linserv1 machine used
-Processor: AMD Opteron(TM) Processor 6272 (x86_64 based processor)
-Processor: 2.1 GHz
+Processor: AMD Opteron(TM) Processor 6272 (Linserv1 machine)
+Processor architecture: x86_64
+Processor speed: 2.1 GHz
 Number of cores per socket: 8
 Number of threads per core: 2
 
