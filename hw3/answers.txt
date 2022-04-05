@@ -11,17 +11,21 @@ Vector time:    0.0327      Error: 2.454130e-03
 Extra Credit: Did not attempt
 
 3. Processor/Architecture specifications shown below:  
-Processor used: Intel Core i5-1035G4 CPU (x64-based processor)
-Processor speed: 1.50 GHz
-Number of cores: 4
+Linserv1 machine used
+Processor: AMD Opteron(TM) Processor 6272 (x86_64 based processor)
+Processor: 2.1 GHz
+Number of cores per socket: 8
+Number of threads per core: 2
 
 The scan was parallelized by modifying the provided "scan_omp" function. 
 Runtimes with different thread numbers are shown below. Note, runtimes were
-averaged over 10 repeats.  
+averaged over 5 repeats.  
 
-0 threads  : 0.617 s
-2 threads  : 0.487 s
-4 threads  : 0.398 s
-8 threads  : 0.381 s
-16 threads : 0.388 s
-32 threads : 0.394 s
+Serial run : 1.701 s
+2 threads  : 1.449 s
+4 threads  : 0.774 s
+8 threads  : 0.379 s
+16 threads : 0.220 s
+32 threads : 0.190 s
+64 threads : 0.184 s
+No further speedup observed. 
