@@ -1,0 +1,87 @@
+1. CUDA code provided in "matrix_vector.cu"
+
+Part I - Inner product between two vectors, runtime (on "cuda2" CIMS machine) and error:
+N = 2 ^ 10, CPU Runtime = 0.00767s
+            GPU Runtime = 0.000177s total, 0.000085s runtime
+            Error = 0.00
+
+N = 2 ^ 18, CPU Runtime = 0.00802s 
+            GPU Runtime = 0.000979s total, 0.000103s runtime
+            Error = 0.00
+
+N = 2 ^ 25, CPU Runtime = 0.0205s
+            GPU Runtime = 0.0878s total, 0.001538s runtime
+            Error = 0.00
+Error is zero over different N values, GPU implementation is correct
+
+N = 2^25, Memory Bandwith for inner product: 
+cuda1 GPU -> GeForce GTX TITAN Black (6 GB memory)   = 8.760 GB/s
+cuda2 GPU -> GeForce RTX 2080 Ti (11 GB memory each) = 9.451 GB/s 
+cuda3 GPU -> TITAN V (12 GB memory each)	         = 5.336 GB/s
+cuda4 GPU -> GeForce GTX TITAN X (12 GB memory each) = 4.343 GB/s
+cuda5 GPU -> GeForce GTX TITAN Z (12 GB memory each) = 2.414 GB/s
+
+Part II - Inner product between matrix and vector, runtime (on "cuda2" CIMS machine) and error: 
+N = 2 ^ 10, CPU Runtime = 0.0885s
+            GPU Runtime = 0.0021s total, 0.0011s runtime
+            Error = 0.00000
+
+N = 2 ^ 12, CPU Runtime = 0.097s
+            GPU Runtime = 0.020s total, 0.0046s runtime
+            Error = 0.00000
+
+N = 2 ^ 15, CPU Runtime = 0.991s
+            GPU Runtime = 1.06s total, 0.054s runtime
+            Error = 0.00004
+Error is zero for multple N values (larger values led to memory issues), GPU 
+implementation is correct
+
+N = 2^12, Memory Bandwith of matrix-vector product: 
+cuda1 GPU -> GeForce GTX TITAN Black (6 GB memory)   = 6.801 GB/s 
+cuda2 GPU -> GeForce RTX 2080 Ti (11 GB memory each) = 13.311 GB/s
+cuda3 GPU -> TITAN V (12 GB memory each)	         = 8.389 GB/s
+cuda4 GPU -> GeForce GTX TITAN X (12 GB memory each) = 6.795 GB/s
+cuda5 GPU -> GeForce GTX TITAN Z (12 GB memory each) = 3.873 GB/s
+
+2. CUDA code provided in "jacobi_2d.cu"
+
+2D Jacobi method, runtime (on "cuda2" CIMS machine) and error
+N = 100 and 10000 iterations
+CPU Runtime = 0.377s
+GPU Runtime = 0.097s total, 0.092s runtime
+CPU Residual Norm. = 0.652
+GPU Residual Norm. = 0.648
+Error = 0.00
+
+N = 1000 and 5000 iterations
+CPU Runtime = 4.109s 
+GPU Runtime = 0.627s total, 0.563s runtime
+CPU Residual Norm. = 887.96
+GPU Residual Norm. = 888.24
+Error = 0.00
+
+N = 10000 and 500 iterations
+CPU Runtime = 41.00s 
+GPU Runtime = 8.030s total, 0.189s runtime
+CPU Residual Norm. = 9964.92 
+GPU Residual Norm. = 9964.93
+Error = 0.00
+
+CPU and GPU residuals are nearly identical and error is zero over
+multiple N values, therefore GPU implementation is correct. 
+
+3. Update on Final Project
+Group Members: Sridhar Pandian Arunachalam, Mohit Gayatri and Ziyun Qui. 
+This week each of us implemented a serial version of the genetic algorithm
+according to different papers/articles found after performing a literature 
+search. We then ran our versions on optimization problems and compared the 
+performance of each implementation. Next, we discussed which 
+version could be best parallelized and how we could go about achieving that. 
+We hope to complete this decision by next week and implement a parallel version 
+of the algorithm using OpenMP. 
+
+One unforeseen problem that we encountered was that most genetic algorithms used
+techniques that are natural to bitstrings - such as flipping/combining bits to
+crossover/mutate individuals. We had to figure out how to apply equivalent 
+operations to floating point numbers.
+
