@@ -1,6 +1,7 @@
-1. CUDA code provided in "matrix_vector.cu"
+1. CUDA code provided in "matrix_vector.cu". 
 
-Part I - Inner product between two vectors, runtime (on "cuda2" CIMS machine) and error:
+Part I - Inner product between two vectors, runtime (on "cuda2" CIMS 
+machine) and error:
 N = 2 ^ 10, CPU Runtime = 0.00767s
             GPU Runtime = 0.000177s total, 0.000085s runtime
             Error = 0.00
@@ -12,7 +13,7 @@ N = 2 ^ 18, CPU Runtime = 0.00802s
 N = 2 ^ 25, CPU Runtime = 0.0205s
             GPU Runtime = 0.0878s total, 0.001538s runtime
             Error = 0.00
-Error is zero over different N values, GPU implementation is correct
+Error is zero over different N values, GPU implementation is correct. 
 
 N = 2^25, Memory Bandwith for inner product: 
 cuda1 GPU -> GeForce GTX TITAN Black (6 GB memory)   = 8.760 GB/s
@@ -21,7 +22,8 @@ cuda3 GPU -> TITAN V (12 GB memory each)	         = 5.336 GB/s
 cuda4 GPU -> GeForce GTX TITAN X (12 GB memory each) = 4.343 GB/s
 cuda5 GPU -> GeForce GTX TITAN Z (12 GB memory each) = 2.414 GB/s
 
-Part II - Inner product between matrix and vector, runtime (on "cuda2" CIMS machine) and error: 
+Part II - Inner product between matrix and vector, runtime (on "cuda2" 
+CIMS machine) and error: 
 N = 2 ^ 10, CPU Runtime = 0.0885s
             GPU Runtime = 0.0021s total, 0.0011s runtime
             Error = 0.00000
@@ -33,8 +35,8 @@ N = 2 ^ 12, CPU Runtime = 0.097s
 N = 2 ^ 15, CPU Runtime = 0.991s
             GPU Runtime = 1.06s total, 0.054s runtime
             Error = 0.00004
-Error is zero for multple N values (larger values led to memory issues), GPU 
-implementation is correct
+Error is zero for all N values < 2^15, larger values led to memory issues,
+so error is slightly above 0. Thus, GPU implementation is correct. 
 
 N = 2^12, Memory Bandwith of matrix-vector product: 
 cuda1 GPU -> GeForce GTX TITAN Black (6 GB memory)   = 6.801 GB/s 
@@ -43,9 +45,9 @@ cuda3 GPU -> TITAN V (12 GB memory each)	         = 8.389 GB/s
 cuda4 GPU -> GeForce GTX TITAN X (12 GB memory each) = 6.795 GB/s
 cuda5 GPU -> GeForce GTX TITAN Z (12 GB memory each) = 3.873 GB/s
 
-2. CUDA code provided in "jacobi_2d.cu"
+2. CUDA code provided in "jacobi_2d.cu". 
 
-2D Jacobi method, runtime (on "cuda2" CIMS machine) and error
+2D Jacobi method, runtime (on "cuda2" CIMS machine) and error: 
 N = 100 and 10000 iterations
 CPU Runtime = 0.377s
 GPU Runtime = 0.097s total, 0.092s runtime
@@ -74,11 +76,11 @@ multiple N values, therefore GPU implementation is correct.
 Group Members: Sridhar Pandian Arunachalam, Mohit Gayatri and Ziyun Qui. 
 This week each of us implemented a serial version of the genetic algorithm
 according to different papers/articles found after performing a literature 
-search. We then ran our versions on optimization problems and compared the 
-performance of each implementation. Next, we discussed which 
-version could be best parallelized and how we could go about achieving that. 
-We hope to complete this decision by next week and implement a parallel version 
-of the algorithm using OpenMP. 
+search. We then ran our versions on a few optimization problems and compared 
+the performance of each implementation. Next, we discussed which version could 
+be best parallelized and how we could go about achieving that. We hope to 
+complete this decision by next week and implement a parallel version of the 
+algorithm using OpenMP. 
 
 One unforeseen problem that we encountered was that most genetic algorithms used
 techniques that are natural to bitstrings - such as flipping/combining bits to
